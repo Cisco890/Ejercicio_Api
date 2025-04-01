@@ -62,6 +62,36 @@ app.get('/incidents/:id', (req, res) => {
     res.json(incident); 
 });
 
+// se hace el put para modificar el status de los incidentes
+app.put('/incidents/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const { status } = req.body;
+
+    const validStatuses = ["pendiente", "en proceso", "resuelto"];
+
+    // Validar si el nuevo status es válido
+    if (!validStatuses.includes(status)) {
+        return res.status(400).json({
+            error: 'El estado debe ser: pendiente, en proceso, resuelto'
+        });
+    }
+
+    // se busca por el id
+    const incident = incidents.find(inc => inc.id === id);
+
+    if (!incident) {
+        return res.status(404).json({ error: 'Incidente no encontrado' });
+    }
+
+    // Actualizar el status
+    incident.status = status;
+
+    res.json({
+        message: 'Estado del incidente actualizado con éxito',
+        incident
+    });
+});
+
 const incidents = [// incidentes guardados 
     {
         id: 1,
