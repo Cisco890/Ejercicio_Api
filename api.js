@@ -80,7 +80,7 @@ app.put('/incidents/:id', (req, res) => {
     const incident = incidents.find(inc => inc.id === id);
 
     if (!incident) {
-        return res.status(404).json({ error: 'Incidente no encontrado' });
+        return res.status(404).json({ error: 'Incidente no encontrado' });// si el id no existe se muestra este mensaje
     }
 
     // Actualizar el status
@@ -91,6 +91,27 @@ app.put('/incidents/:id', (req, res) => {
         incident
     });
 });
+
+// se hace un delete para eliminar el incidente
+app.delete('/incidents/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+
+    //se busca por medio del id
+    const index = incidents.findIndex(inc => inc.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ error: 'Incidente no encontrado' });// si el id no existe se muestra este mensaje
+    }
+
+    // Eliminamos el incidente
+    const deletedIncident = incidents.splice(index, 1)[0];
+
+    res.json({
+        message: 'Incidente eliminado correctamente',
+        incident: deletedIncident
+    });
+});
+
 
 const incidents = [// incidentes guardados 
     {
