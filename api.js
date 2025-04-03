@@ -1,3 +1,4 @@
+// Juan Francisco Martínez 23617 --- API de Incidentes con Express js usando Prisma como ORM 
 const express = require('express') ; 
 
 const app = express() ; //hacemos una instancia de express 
@@ -88,52 +89,76 @@ app.get('/incidents/:id', async (req, res) => {
 
 
 // se hace el put para modificar el status de los incidentes
-app.put('/incidents/:id', (req, res) => {
+app.put('/incidents/:id', async (req, res) => {
     const id = parseInt(req.params.id);
-    const { status } = req.body;
+    let { status } = req.body;
 
-    const validStatuses = ["pendiente", "en proceso", "resuelto"];
+    if (status === "en proceso") {// se hace esto para que coincida con el valor que establecimos al momento de crear la db 
+        status = "en_proceso";
+    }
 
-    // Validar si el nuevo status es válido
-    if (!validStatuses.includes(status)) {
+    const validStatus = ["pendiente", "en_proceso", "resuelto"];// valida que sea uno de los status permitidos
+
+    if (!validStatus.includes(status)) {
         return res.status(400).json({
-            error: 'El estado debe ser: pendiente, en proceso, resuelto'
+            error: 'El estado debe ser: pendiente, en proceso, resuelto'// error si se ingresa otro tipo de status 
         });
     }
 
-    // se busca por el id
-    const incident = incidents.find(inc => inc.id === id);
+    try {
+       
+        const incident = await prisma.incidents.findUnique({// se llama a prisma para buscar incidentes
+            where: { id }//se busca por medio del id
+        });
 
-    if (!incident) {
-        return res.status(404).json({ error: 'Incidente no encontrado' });// si el id no existe se muestra este mensaje
+        if (!incident) {
+            return res.status(404).json({ error: 'Incidente no encontrado' });//error si no existe el incidente 
+        }
+
+        // se actualiza el status
+        const updatedIncident = await prisma.incidents.update({// se llama a prisma para hacer el update
+            where: { id },
+            data: { status }
+        });
+
+        res.json({
+            message: 'Estado del incidente actualizado con éxito',
+            incident: updatedIncident
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al actualizar el incidente' });
     }
-
-    // Actualizar el status
-    incident.status = status;
-
-    res.json({
-        message: 'Estado del incidente actualizado con éxito',
-        incident
-    });
 });
+
 
 // se hace un delete para eliminar el incidente
-app.delete('/incidents/:id', (req, res) => {
+app.delete('/incidents/:id', async (req, res) => {
     const id = parseInt(req.params.id);
 
-    //se busca por medio del id
-    const index = incidents.findIndex(inc => inc.id === id);
+    try {
+        
+        const incident = await prisma.incidents.findUnique({// se llama a prisma para buscar incidentes
+            where: { id }//se busca por medio del id
+        });
 
-    if (index === -1) {
-        return res.status(404).json({ error: 'Incidente no encontrado' });// si el id no existe se muestra este mensaje
+        if (!incident) {
+            return res.status(404).json({ error: 'Incidente no encontrado' });//error si no existe el incidente
+        }
+
+        
+        const deletedIncident = await prisma.incidents.delete({// se llama a prisma para eliminar el incidente deseado 
+            where: { id }
+        });
+
+        res.json({
+            message: 'Incidente eliminado correctamente',
+            incident: deletedIncident
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al eliminar el incidente' });
     }
-
-    // Eliminamos el incidente
-    const deletedIncident = incidents.splice(index, 1)[0];
-
-    res.json({
-        message: 'Incidente eliminado correctamente',
-        incident: deletedIncident
-    });
 });
-
