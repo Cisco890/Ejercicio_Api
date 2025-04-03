@@ -82,6 +82,9 @@ app.get('/', (req, res) => {
         <h4>PUT /incidents/:id </h4>
         <p>Modifica el status de UN incidente en específico utilizando el id</p>
         <p>El status puede ser: "pendiente", "en_proceso", "resuelto" </p>
+        <p>Ejemplo de uso: {
+        "status": "en proceso"
+        }</p>
 
         <h4>DELETE /incidents/:id</h4>
         <p>Elimina UN incidente utilizando el id </p>
