@@ -53,6 +53,9 @@ Antes de ejecutar esta API, asegurate de tener instalado lo siguiente:
 ![Image](https://github.com/user-attachments/assets/7fc04f59-2752-40dd-9e94-63d4f6d42428)
 Ejemplo de get/incidentes
 
+![Image](https://github.com/user-attachments/assets/7ef1f8d8-d1e5-4365-977f-dd03eda3239b)
+Ejemplo de post/incidents
+
 ### 📍 `/incidents/:id`
 
 | Método | Descripción                                 |
