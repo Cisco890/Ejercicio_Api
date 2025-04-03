@@ -66,6 +66,10 @@ Ejemplo de post/incidents
 
 ![Image](https://github.com/user-attachments/assets/8b324d49-c2bb-484a-9334-709d2195d54d)
 Ejemplo de get/incidents/:id
+
+![Image](https://github.com/user-attachments/assets/acee02cc-39f0-408c-a237-d90d1a0a617c)
+Ejemplo de put/incidents/:id
+
 ---
 
 ## 📌 Campos del modelo de incidente
