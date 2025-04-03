@@ -112,7 +112,10 @@ app.post('/incidents', async (req, res) => {
     const { reporter, description } = req.body;
 
     if (!reporter || !description) {
-        return res.status(400).json({ error: 'Son requeridos: reporter, description' });
+        return res.status(400).json({ error: 'Son requeridos: reporter, description' });// se pide que el reporter y description sean obligatorios
+    }
+    if (description.length < 10) {
+        return res.status(400).json({ error: 'La descripción debe tener al menos 10 caracteres' });// se pide que la description tenga 10 caracteres
     }
 
     try {
