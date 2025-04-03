@@ -64,6 +64,8 @@ Ejemplo de post/incidents
 | PUT    | Actualizar el estado de un incidente        |
 | DELETE | Eliminar un incidente                       |
 
+![Image](https://github.com/user-attachments/assets/8b324d49-c2bb-484a-9334-709d2195d54d)
+Ejemplo de get/incidents/:id
 ---
 
 ## 📌 Campos del modelo de incidente
