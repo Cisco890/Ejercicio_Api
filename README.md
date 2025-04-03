@@ -1,6 +1,6 @@
-Esta API REST está desarrollada con **Node.js**, **Express**, **Prisma ORM** y **PostgreSQL**. Permite realizar operaciones para crear, leer, actualizar y eliminar reportes de incidentes. 
+Esta API REST 
 ---
-
+Está desarrollada con **Node.js**, **Express**, **Prisma ORM** y **PostgreSQL**. Permite realizar operaciones para crear, leer, actualizar y eliminar reportes de incidentes. 
 ## ✅ Prerrequisitos
 
 Antes de ejecutar esta API, asegurate de tener instalado lo siguiente:
