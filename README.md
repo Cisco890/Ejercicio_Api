@@ -1,6 +1,7 @@
 Esta API REST 
 ---
 Está desarrollada con **Node.js**, **Express**, **Prisma ORM** y **PostgreSQL**. Permite realizar operaciones para crear, leer, actualizar y eliminar reportes de incidentes. 
+Para ver el html explicando los Enpoints debes de correr http://localhost:3000/ en tu navegador
 ## ✅ Prerrequisitos
 
 Antes de ejecutar esta API, asegurate de tener instalado lo siguiente:
@@ -69,6 +70,9 @@ Ejemplo de get/incidents/:id
 
 ![Image](https://github.com/user-attachments/assets/acee02cc-39f0-408c-a237-d90d1a0a617c)
 Ejemplo de put/incidents/:id
+
+![Image](https://github.com/user-attachments/assets/ef360f62-2249-452f-a4c7-3b814e8152d4)
+Ejemplo de delete/incidents/:id
 
 ---
 
