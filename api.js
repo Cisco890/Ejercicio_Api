@@ -1,13 +1,16 @@
 const express = require('express') ; 
 
 const app = express() ; //hacemos una instancia de express 
-const port = 2400;  // le indicamos un puerto 
+const port = 3000;  // le indicamos un puerto 
+const { PrismaClient } = require('@prisma/client')// se importa prisma
+const prisma = new PrismaClient();// se configura prisma para poder ser utilizado 
+
 
 app.use(express.json()); //le decimos a express que vamos a usar json
 
 //confirmamos que el servidor esta corriendo
 app.listen(port, () => {
-    console.log('Server is running on port 2400'); 
+    console.log('Server is running on port 3000'); 
 });
 
 // creamos una ruta 'principal' 
@@ -26,28 +29,34 @@ app.get('/incidents', (req, res) => {
 });
 
 // se hace un post para los incidentes
-app.post('/incidents', (req, res) => {
+app.post('/incidents', async (req, res) => {
     const { reporter, description } = req.body;
 
-    if (!reporter || !description) {// si el incidente que se quiere agregar no tiene uno de estos campos, da error. 
+    if (!reporter || !description) {
         return res.status(400).json({ error: 'Son requeridos: reporter, description' });
     }
 
-    const newIncident = {// la "estructura" de los incidentes
-        id: incidents.length + 1,
-        reporter,
-        description,
-        status: "pendiente",
-        created_at: new Date().toISOString()
-    };
+    try {
+        const newIncident = await prisma.incidents.create({// se llama prisma para conectar con la db
+            data: {
+                reporter,
+                description,
+                status: 'pendiente', 
+               
+            }
+        });
 
-    incidents.push(newIncident); // push a los incidentes
+        res.status(201).json({
+            message: 'Nuevo incidente creado con éxito',
+            incident: newIncident
+        });
 
-    res.status(201).json({
-        message: 'Nuevo incidente creado con éxito',// mensaje de confirmación de la creación de los incidentes 
-        incident: newIncident
-    });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al crear el incidente' });
+    }
 });
+
 
 //Se obtienen los incidentes por medio del id
 app.get('/incidents/:id', (req, res) => {
