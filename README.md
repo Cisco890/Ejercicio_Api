@@ -50,7 +50,7 @@ Antes de ejecutar esta API, asegurate de tener instalado lo siguiente:
 | GET    | Obtener todos los incidentes       |
 | POST   | Crear un nuevo incidente           |
 
-![alt text]([image.png](https://github.com/Cisco890/imagenesapi/blob/6a7c298b018f72bc58501e4aea09cb9ac6014c09/Screenshot%202025-04-03%20120158.png))
+![Image](https://github.com/user-attachments/assets/7fc04f59-2752-40dd-9e94-63d4f6d42428)
 Ejemplo de get/incidentes
 
 ### 📍 `/incidents/:id`
