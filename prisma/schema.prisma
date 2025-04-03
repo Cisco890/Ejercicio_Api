@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  pendiente
+  en_proceso
+  resuelto
+}
+
+model Incidents {
+  id          Int      @id @default(autoincrement())
+  reporter    String   @db.VarChar(60)
+  description String   @db.VarChar(60)
+  status      Status   @default(pendiente)
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("incidents")
+}

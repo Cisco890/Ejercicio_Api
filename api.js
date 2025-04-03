@@ -7,7 +7,7 @@ app.use(express.json()); //le decimos a express que vamos a usar json
 
 //confirmamos que el servidor esta corriendo
 app.listen(port, () => {
-    console.log('Server is running'); 
+    console.log('Server is running on port 2400'); 
 });
 
 // creamos una ruta 'principal' 
