@@ -129,34 +129,3 @@ app.delete('/incidents/:id', (req, res) => {
     });
 });
 
-
-const incidents = [// incidentes guardados 
-    {
-        id: 1,
-        reporter: "Lucía Fernández",
-        description: "La computadora se reinicia sola constantemente.",
-        status: "pendiente",
-        created_at: "2025-03-27T09:15:00Z"
-    },
-    {
-        id: 2,
-        reporter: "Carlos Méndez",
-        description: "Las luces del pasillo no encienden.",
-        status: "en proceso",
-        created_at: "2025-03-27T10:45:00Z"
-    },
-    {
-        id: 3,
-        reporter: "Ana López",
-        description: "El software de contabilidad no abre correctamente.",
-        status: "resuelto",
-        created_at: "2025-03-26T16:20:00Z"
-    },
-    {
-        id: 4,
-        reporter: "Diego Ramírez",
-        description: "Problemas con el acceso a la red WiFi.",
-        status: "pendiente",
-        created_at: "2025-03-25T13:00:00Z"
-    }
-];
