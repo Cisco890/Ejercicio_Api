@@ -14,15 +14,85 @@ app.listen(port, () => {
     console.log('Server is running on port 3000'); 
 });
 
-// creamos una ruta 'principal' 
+// creamos una ruta 'principal' donde se pueden revisar los distintos endpoints de la API 
 app.get('/', (req, res) => {
-    let html = `
-    <h1>Api Incidentes</h1>
-    <p>Bienvenido a la Api para gestionar los incidentes</p>`;
+    const html = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>API de Incidentes</title>
+    </head>
+    <body>
+        <h1>API de Incidentes</h1>
+        <p>Bienvenido a la API para gestionar los incidentes.</p>
+        <p><strong>Endpoints disponibles:</strong></p>
+        
+        <h4><a href="/incidents">GET /incidents</a></h4>
+        <p>Hace fetch de los incidentes almacenados en la base de datos</p>
 
-    res.send(html); 
-}
-);
+        <h4><a href="/incidents/1">GET /incidents/:id</a> </h4>
+        <p>Hace fetch de UN incidente en específico utilizando un id válido (revisar el get para saber que id's son válidos)</p>
+
+        <h4>POST /incidents</h4>
+        <p>Crea un incidente nuevo con los siguientes campos:</p>
+
+        <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse;">
+        <thead>
+            <tr>
+            <th>Campo</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td><code>id</code></td>
+            <td>Int</td>
+            <td>Generado automáticamente (autoincrement)</td>
+            </tr>
+            <tr>
+            <td><code>reporter</code></td>
+            <td>String</td>
+            <td>Ingresado por el usuario</td>
+            </tr>
+            <tr>
+            <td><code>description</code></td>
+            <td>String</td>
+            <td>Descripción del incidente, dada por el usuario</td>
+            </tr>
+            <tr>
+            <td><code>status</code></td>
+            <td>Enum (Status)</td>
+            <td>Por defecto: <code>pendiente</code></td>
+            </tr>
+            <tr>
+            <td><code>createdAt</code></td>
+            <td>DateTime</td>
+            <td>Generado automáticamente con la hora actual</td>
+            </tr>
+        </tbody>
+        </table>
+        <p>Ejemplo de uso: {
+        "reporter": "Maria Gomez",
+        "description": "impresora sin tinta"
+        }
+        </p>
+
+        <h4>PUT /incidents/:id </h4>
+        <p>Modifica el status de UN incidente en específico utilizando el id</p>
+        <p>El status puede ser: "pendiente", "en_proceso", "resuelto" </p>
+
+        <h4>DELETE /incidents/:id</h4>
+        <p>Elimina UN incidente utilizando el id </p>
+    </body>
+    </html>
+    `;
+
+    res.send(html);
+});
+
+
 
 //Se obtienen los incidentes 
 app.get('/incidents', async (req, res) => {
