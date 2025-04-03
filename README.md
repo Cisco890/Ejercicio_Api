@@ -18,6 +18,7 @@ Antes de ejecutar esta API, asegurate de tener instalado lo siguiente:
 2. **Instalar dependencias**
    ```bash
    npm install
+   npm install express
    ```
 
 3. **Configurar variables de entorno**
