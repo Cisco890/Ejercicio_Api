@@ -24,8 +24,16 @@ app.get('/', (req, res) => {
 );
 
 //Se obtienen los incidentes 
-app.get('/incidents', (req, res) => {
-    res.send(incidents);
+app.get('/incidents', async (req, res) => {
+    try {
+        const incidents = await prisma.incidents.findMany();// se llama prisma para conectar con la db
+
+        res.json(incidents);// se devuelve como json 
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al obtener los incidentes' });
+    }
 });
 
 // se hace un post para los incidentes
