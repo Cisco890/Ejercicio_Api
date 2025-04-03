@@ -67,17 +67,25 @@ app.post('/incidents', async (req, res) => {
 
 
 //Se obtienen los incidentes por medio del id
-app.get('/incidents/:id', (req, res) => {
-    const id = parseInt(req.params.id); 
+app.get('/incidents/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
 
-    const incident = incidents.find(inc => inc.id === id); // se busca por el id
+    try {
+        const incident = await prisma.incidents.findUnique({//se llama prisma para conectar con la db
+            where: { id }// se indica que se busca por medio del id
+        });
 
-    if (!incident) {
-        return res.status(404).json({ error: 'Incidente no encontrado' });// si el id no existe se muestra este mensaje
+        if (!incident) {
+            return res.status(404).json({ error: 'Incidente no encontrado' });// indica que el id no se  ha encontrado
+        }
+
+        res.json(incident);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al buscar el incidente' });
     }
-
-    res.json(incident); 
 });
+
 
 // se hace el put para modificar el status de los incidentes
 app.put('/incidents/:id', (req, res) => {
