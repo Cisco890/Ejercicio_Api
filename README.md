@@ -7,7 +7,7 @@ Para ver el html explicando los Enpoints debes de correr http://localhost:3000/ 
 Antes de ejecutar esta API, asegurate de tener instalado lo siguiente:
 
 - [Node.js](https://nodejs.org/)
-- [PostgreSQL](https://www.postgresql.org/)
+
 
 ---
 
@@ -87,3 +87,4 @@ Ejemplo de delete/incidents/:id
 | createdAt   | DateTime   | Fecha y hora de creación automática           |
 
 ---
+Juan Francisco Martínez 
