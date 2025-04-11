@@ -1,13 +1,13 @@
 Esta API REST 
 ---
 Está desarrollada con **Node.js**, **Express**, **Prisma ORM** y **PostgreSQL**. Permite realizar operaciones para crear, leer, actualizar y eliminar reportes de incidentes. 
-Para ver el html explicando los Enpoints debes de correr http://localhost:3000/ en tu navegador
+Para ver el html explicando los Endpoints debes de correr http://localhost:3000/ en tu navegador
 ## ✅ Prerrequisitos
 
 Antes de ejecutar esta API, asegurate de tener instalado lo siguiente:
 
 - [Node.js](https://nodejs.org/)
-- [PostgreSQL](https://www.postgresql.org/)
+
 
 ---
 
@@ -18,6 +18,7 @@ Antes de ejecutar esta API, asegurate de tener instalado lo siguiente:
 2. **Instalar dependencias**
    ```bash
    npm install
+   npm install express
    ```
 
 3. **Configurar variables de entorno**
@@ -87,3 +88,4 @@ Ejemplo de delete/incidents/:id
 | createdAt   | DateTime   | Fecha y hora de creación automática           |
 
 ---
+Juan Francisco Martínez 
