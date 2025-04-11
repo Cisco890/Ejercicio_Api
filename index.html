@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Incidentes</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    
+    body {
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    h2 {
+      color: #3498db;
+      margin-top: 0;
+    }
+    
+    .section {
+      margin-bottom: 30px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+    
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #2980b9;
+    }
+    
+    .search-box {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .search-box input {
+      margin-bottom: 0;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+    }
+    
+    .view-btn {
+      background-color: #2ecc71;
+    }
+    
+    .view-btn:hover {
+      background-color: #27ae60;
+    }
+    
+    #delete-button {
+      background-color: #e74c3c;
+    }
+    
+    #delete-button:hover {
+      background-color: #c0392b;
+    }
+    
+    .actions {
+      margin-top: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .detail-card {
+      padding: 15px;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .message {
+      padding: 10px;
+      border-radius: 4px;
+      margin: 10px 0;
+      display: none;
+    }
+    
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+    
+    small {
+      color: #7f8c8d;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sistema de Incidentes</h1>
+    
+    <!-- Formulario para crear incidentes -->
+    <div class="section">
+      <h2>Crear Incidente</h2>
+      <form id="create-form">
+        <div>
+          <label for="reporter">Reportado por:</label>
+          <input type="text" id="reporter" required>
+        </div>
+        <div>
+          <label for="description">Descripción:</label>
+          <textarea id="description" required minlength="10"></textarea>
+          <small>Mínimo 10 caracteres</small>
+        </div>
+        <button type="submit">Crear</button>
+      </form>
+    </div>
+    
+    <!-- Buscar por ID -->
+    <div class="section">
+      <h2>Buscar Incidente</h2>
+      <div class="search-box">
+        <input type="number" id="search-input" placeholder="ID del incidente">
+        <button id="search-button">Buscar</button>
+      </div>
+      <div id="search-result"></div>
+    </div>
+    
+    <!-- Lista de incidentes -->
+    <div class="section">
+      <h2>Lista de Incidentes</h2>
+      <div id="incidents-list"></div>
+    </div>
+    
+    <!-- Detalles del incidente -->
+    <div class="section" id="incident-detail-container" style="display: none;">
+      <h2>Detalles del Incidente</h2>
+      <div id="incident-details"></div>
+    </div>
+    
+    <!-- Mensaje de estado -->
+    <div id="message" class="message"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

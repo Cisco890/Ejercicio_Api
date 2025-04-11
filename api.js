@@ -1,10 +1,16 @@
-// Juan Francisco Martínez 23617 --- API de Incidentes con Express js usando Prisma como ORM 
-const express = require('express') ; 
+// Juan Francisco Martínez 23617 --- API de Incidentes con Express JS usando Prisma como ORM 
 
-const app = express() ; //hacemos una instancia de express 
-const port = 3000;  // le indicamos un puerto 
-const { PrismaClient } = require('@prisma/client')// se importa prisma
-const prisma = new PrismaClient();// se configura prisma para poder ser utilizado 
+const express = require('express'); 
+const cors = require('cors');
+const { PrismaClient } = require('@prisma/client');
+
+const app = express(); // Hacemos una instancia de express 
+const prisma = new PrismaClient(); // Prisma Client para conectarse a la base de datos
+const port = 3000;  // Puerto del servidor
+
+// Middleware
+app.use(cors());           // Habilita CORS
+app.use(express.json());   // Permite recibir JSON en las peticiones
 
 
 app.use(express.json()); //le decimos a express que vamos a usar json
@@ -238,3 +244,6 @@ app.delete('/incidents/:id', async (req, res) => {
         res.status(500).json({ error: 'Error al eliminar el incidente' });
     }
 });
+
+
+
