@@ -2,23 +2,30 @@
 
 const express = require('express'); 
 const cors = require('cors');
+const path = require('path');
 const { PrismaClient } = require('@prisma/client');
 
-const app = express(); // Hacemos una instancia de express 
-const prisma = new PrismaClient(); // Prisma Client para conectarse a la base de datos
-const port = 3000;  // Puerto del servidor
+const app = express(); 
+const prisma = new PrismaClient(); 
+const port = 3000;  
 
 // Middleware
-app.use(cors());           // Habilita CORS
-app.use(express.json());   // Permite recibir JSON en las peticiones
+app.use(cors());
+app.use(express.json());
 
+// Servir archivos estáticos desde la raíz del proyecto
+app.use(express.static(__dirname));
 
-app.use(express.json()); //le decimos a express que vamos a usar json
-
-//confirmamos que el servidor esta corriendo
-app.listen(port, () => {
-    console.log('Server is running on port 3000'); 
+// Ruta principal que sirve el index.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+// Confirmación de que el servidor está corriendo
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`); 
+});
+
 
 // creamos una ruta 'principal' donde se pueden revisar los distintos endpoints de la API 
 app.get('/', (req, res) => {
